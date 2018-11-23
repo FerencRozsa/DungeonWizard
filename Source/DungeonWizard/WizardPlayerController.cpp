@@ -23,4 +23,15 @@ void AWizardPlayerController::BeginPlay()
 
 }
 
+void AWizardPlayerController::CreateHealthBar()
+{
+	if (wPlayerHealthBar)
+	{
+		PlayerHealthBar = CreateWidget<UUserWidget>(this, wPlayerHealthBar);
+	}
 
+	if (PlayerHealthBar)
+	{
+		PlayerHealthBar->AddToViewport();
+	}
+}

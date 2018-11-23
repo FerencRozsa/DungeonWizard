@@ -38,6 +38,12 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Gameplay)
 		int AttackCount;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+		float CurrentHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+		float MaxHealth;
+
 protected:
 
 
@@ -48,6 +54,8 @@ protected:
 	void LookUpAtRate(float Rate);
 	void TouchStarted(ETouchIndex::Type FingerIndex, FVector Location);
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
+
+	virtual void BeginPlay() override;
 
 protected:
 

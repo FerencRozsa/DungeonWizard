@@ -19,5 +19,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets") TSubclassOf<class UUserWidget> wMainMenu;
 		UUserWidget* MyMainMenu;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets") TSubclassOf<class UUserWidget> wPlayerHealthBar;
+		UUserWidget* PlayerHealthBar;
+
 	virtual void BeginPlay() override;
+
+	void CreateHealthBar();
 };
