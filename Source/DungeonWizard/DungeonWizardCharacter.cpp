@@ -17,7 +17,7 @@
 ADungeonWizardCharacter::ADungeonWizardCharacter()
 {
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-	BaseTurnRate = 45.f;
+	BaseTurnRate = 0.f;
 	BaseLookUpRate = 45.f;
 
 	bUseControllerRotationPitch = false;
