@@ -11,7 +11,7 @@ APlayerProjectile::APlayerProjectile()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
-	CollisionComp->InitSphereRadius(5.0f);
+	CollisionComp->InitSphereRadius(25.0f);
 	CollisionComp->BodyInstance.SetCollisionProfileName("Projectile");
 	CollisionComp->OnComponentHit.AddDynamic(this, &APlayerProjectile::OnHit);
 
@@ -32,22 +32,17 @@ APlayerProjectile::APlayerProjectile()
 
 void APlayerProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != NULL) && (OtherActor != this) && (OtherComp != NULL) && OtherComp->IsSimulatingPhysics())
 	{
-		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
-
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetActorLocation());
-
 		UGameplayStatics::PlaySoundAtLocation(GetWorld(), AudioEffect, GetActorLocation());
 
 
-		OtherActor->Destroy();
-		Destroy();
+		//OtherActor->Destroy();
+		//Destroy();
 
 	}
-	else
-		Destroy();
+		//Destroy();
 }
 
 
