@@ -8,14 +8,16 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
-
+#include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
+#include "WizardPlayerController.h"
 //////////////////////////////////////////////////////////////////////////
 // ADungeonWizardCharacter
 
 ADungeonWizardCharacter::ADungeonWizardCharacter()
 {
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-	BaseTurnRate = 45.f;
+	BaseTurnRate = 0.f;
 	BaseLookUpRate = 45.f;
 
 	bUseControllerRotationPitch = false;
@@ -27,22 +29,26 @@ ADungeonWizardCharacter::ADungeonWizardCharacter()
 	GetCharacterMovement()->JumpZVelocity = 600.f;
 	GetCharacterMovement()->AirControl = 0.2f;
 
-	// Create a camera boom (pulls in towards the player if there is a collision)
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
-	CameraBoom->TargetArmLength = 300.0f; // The camera follows at this distance behind the character	
-	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
+	CameraBoom->TargetArmLength = 300.0f; 
+	CameraBoom->bUsePawnControlRotation = true; 
 
-	// Create a follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
-	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+	FollowCamera->bUsePawnControlRotation = false; 
 }
 
+void ADungeonWizardCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	AWizardPlayerController* Controller = Cast<AWizardPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+
+	Controller->CreateHealthBar();
+}
 
 void ADungeonWizardCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
-	// Set up gameplay key bindings
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
