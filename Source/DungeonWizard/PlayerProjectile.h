@@ -16,7 +16,7 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
 		class USphereComponent* CollisionComp;
 
-	UPROPERTY(EditAnywhere, Category = Movement, meta = (AllowPrivateAcess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAcess = "true"))
 		class UProjectileMovementComponent* ProjectileMovement;
 
 	UPROPERTY(EditDefaultsOnly, Category = "FX")
