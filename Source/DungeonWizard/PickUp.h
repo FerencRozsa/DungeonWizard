@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "PickUp.generated.h"
 
+class USphereComponent;
+
 UCLASS()
 class DUNGEONWIZARD_API APickUp : public AActor
 {
@@ -19,8 +21,15 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Pickup")
 		void OnActivate(AActor* pickedUpBy);
 
-	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 		USphereComponent* SphereComp;
+
+	UPROPERTY(EditAnywhere, Category = Gameplay)
+		float healthGained;
+	UPROPERTY(EditAnywhere, Category = Gameplay)
+		float staminaGained;
+	UPROPERTY(EditAnywhere, Category = Gameplay)
+		float rageGained;
 
 
 protected:
@@ -28,7 +37,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
+
 	virtual void Tick(float DeltaTime) override;
 
 	

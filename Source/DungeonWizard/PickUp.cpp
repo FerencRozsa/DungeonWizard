@@ -29,8 +29,5 @@ void APickUp::NotifyActorBeginOverlap(AActor * OtherActor)
 	Destroy();
 }
 
-void APickUp::OnActivate(AActor* pickedUpBy)
-{
 
-}
 
