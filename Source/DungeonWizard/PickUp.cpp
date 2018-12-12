@@ -2,32 +2,60 @@
 
 #include "PickUp.h"
 #include "Components/SphereComponent.h"
+#include "DungeonWizardCharacter.h"
+#include "Kismet/GameplayStatics.h"
 
-// Sets default values
 APickUp::APickUp()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	SphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
+	RespawnTimer = 7;
 }
 
-// Called when the game starts or when spawned
 void APickUp::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-// Called every frame
 void APickUp::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (PickedUp)
+	{
+		RespawnTimer -= DeltaTime;
+		
+		if (RespawnTimer <= 0)
+		{
+			RespawnPickUp();
+		}
+	}
 }
 
 void APickUp::NotifyActorBeginOverlap(AActor * OtherActor)
 {
+
 	OnActivate(OtherActor);
-	Destroy();
+	ADungeonWizardCharacter* Character = Cast<ADungeonWizardCharacter>(OtherActor);
+	Character->CurrentHealth += healthGained;
+	Character->Rage += rageGained;
+	Character->CurrentStamina += staminaGained;
+	
+	DestroyPickUp();
 }
 
+void APickUp::RespawnPickUp()
+{
+	RespawnTimer = 7;
+	SetActorHiddenInGame(false);
+	SetActorEnableCollision(true);
+	PickedUp = false;
+}
 
+void APickUp::DestroyPickUp()
+{
+	PickedUp = true;
+	SetActorHiddenInGame(true);
+	SetActorEnableCollision(false);
+}
 

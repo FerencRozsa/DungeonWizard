@@ -19,4 +19,3 @@ void AInteractableTorch::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-

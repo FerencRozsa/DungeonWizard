@@ -27,14 +27,20 @@ public:
 	UPROPERTY(EditAnywhere, Category = Gameplay)
 		float healthGained;
 	UPROPERTY(EditAnywhere, Category = Gameplay)
-		float staminaGained;
-	UPROPERTY(EditAnywhere, Category = Gameplay)
 		float rageGained;
+	UPROPERTY(EditAnywhere, Category = Gameplay)
+		float staminaGained;
 
 
 protected:
 
 	virtual void BeginPlay() override;
+
+	bool PickedUp = false;
+	float RespawnTimer;
+
+	void RespawnPickUp();
+	void DestroyPickUp();
 
 public:	
 
