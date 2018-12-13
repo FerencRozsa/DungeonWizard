@@ -15,7 +15,8 @@ UWizardAbility::UWizardAbility()
 void UWizardAbility::BeginPlay()
 {
 	Super::BeginPlay();	
-
+	SetCooldownOne = CooldownAbilityOne;
+	SetCooldownTwo = CooldownAbilityTwo;
 }
 
 
@@ -41,7 +42,7 @@ void UWizardAbility::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 		if (CooldownAbilityTwo <= 0)
 		{
 			CooldownAbilityTwo = SetCooldownTwo;
-			canBeUsedAbilityOne = true;
+			canBeUsedAbilityTwo = true;
 		}
 	}
 
@@ -49,14 +50,20 @@ void UWizardAbility::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 void UWizardAbility::AbilityOne()
 {
-	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetOwner()->GetActorTransform());
-	UGameplayStatics::PlaySoundAtLocation(GetWorld(), AudioEffect, GetOwner()->GetActorLocation());
-	canBeUsedAbilityOne = false;
+	if (canBeUsedAbilityOne)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetOwner()->GetActorTransform());
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), AudioEffect, GetOwner()->GetActorLocation());
+		canBeUsedAbilityOne = false;
+	}	
 }
 
 void UWizardAbility::AbilityTwo()
 {
-	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetOwner()->GetActorTransform());
-	UGameplayStatics::PlaySoundAtLocation(GetWorld(), AudioEffect, GetOwner()->GetActorLocation());
-	canBeUsedAbilityTwo = false;
+	if (canBeUsedAbilityTwo)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetOwner()->GetActorTransform());
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), AudioEffect, GetOwner()->GetActorLocation());
+		canBeUsedAbilityTwo = false;
+	}
 }
