@@ -22,6 +22,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets") TSubclassOf<class UUserWidget> wPlayerHealthBar;
 		UUserWidget* PlayerHealthBar;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets") TSubclassOf<class UUserWidget> wPlayerAbilities;
+		UUserWidget* PlayerAbilities;
+
+
 	virtual void BeginPlay() override;
 
 	void CreateHealthBar();

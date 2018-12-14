@@ -11,14 +11,14 @@ void AWizardPlayerController::BeginPlay()
 	if (wMainMenu)
 	{
 		MyMainMenu = CreateWidget<UUserWidget>(this, wMainMenu);
-	}
 
-	if (MyMainMenu)
-	{
-		MyMainMenu->AddToViewport();
-		SetInputMode(FInputModeUIOnly());
-		SetPause(true);
-		bShowMouseCursor = true;
+		if (MyMainMenu)
+		{
+			MyMainMenu->AddToViewport();
+			SetInputMode(FInputModeUIOnly());
+			SetPause(true);
+			bShowMouseCursor = true;
+		}
 	}
 
 }
@@ -28,10 +28,20 @@ void AWizardPlayerController::CreateHealthBar()
 	if (wPlayerHealthBar)
 	{
 		PlayerHealthBar = CreateWidget<UUserWidget>(this, wPlayerHealthBar);
+
+		if (PlayerHealthBar)
+		{
+			PlayerHealthBar->AddToViewport();
+		}
 	}
 
-	if (PlayerHealthBar)
+	if (wPlayerAbilities)
 	{
-		PlayerHealthBar->AddToViewport();
+		PlayerAbilities = CreateWidget<UUserWidget>(this, wPlayerAbilities);
+
+		if (PlayerAbilities)
+		{
+			PlayerAbilities->AddToViewport();
+		}
 	}
 }
