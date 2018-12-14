@@ -31,8 +31,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 		float CooldownAbilityTwo;
 
-	float SetCooldownOne;
-	float SetCooldownTwo;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Gameplay)
+		float SetCooldownOne;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Gameplay)
+		float SetCooldownTwo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 		bool canBeUsedAbilityOne = true;
