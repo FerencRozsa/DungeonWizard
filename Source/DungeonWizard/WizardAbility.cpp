@@ -8,7 +8,6 @@
 UWizardAbility::UWizardAbility()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-
 }
 
 
