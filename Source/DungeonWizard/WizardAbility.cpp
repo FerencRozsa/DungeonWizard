@@ -8,7 +8,6 @@
 UWizardAbility::UWizardAbility()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-
 }
 
 
@@ -16,7 +15,6 @@ void UWizardAbility::BeginPlay()
 {
 	Super::BeginPlay();	
 	SetCooldownOne = CooldownAbilityOne;
-	SetCooldownTwo = CooldownAbilityTwo;
 }
 
 
@@ -35,17 +33,6 @@ void UWizardAbility::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 		}
 	}
 
-	if (canBeUsedAbilityTwo == false)
-	{
-		CooldownAbilityTwo -= DeltaTime;
-
-		if (CooldownAbilityTwo <= 0)
-		{
-			CooldownAbilityTwo = SetCooldownTwo;
-			canBeUsedAbilityTwo = true;
-		}
-	}
-
 }
 
 void UWizardAbility::AbilityOne()
@@ -56,14 +43,4 @@ void UWizardAbility::AbilityOne()
 		UGameplayStatics::PlaySoundAtLocation(GetWorld(), AudioEffect, GetOwner()->GetActorLocation());
 		canBeUsedAbilityOne = false;
 	}	
-}
-
-void UWizardAbility::AbilityTwo()
-{
-	if (canBeUsedAbilityTwo)
-	{
-		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetOwner()->GetActorTransform());
-		UGameplayStatics::PlaySoundAtLocation(GetWorld(), AudioEffect, GetOwner()->GetActorLocation());
-		canBeUsedAbilityTwo = false;
-	}
 }
