@@ -25,6 +25,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets") TSubclassOf<class UUserWidget> wPlayerAbilities;
 		UUserWidget* PlayerAbilities;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+		USoundBase* Sound;
 
 	virtual void BeginPlay() override;
 

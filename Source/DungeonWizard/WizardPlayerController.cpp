@@ -2,6 +2,7 @@
 
 #include "WizardPlayerController.h"
 #include "Blueprint/UserWidget.h"
+#include "Kismet/GameplayStatics.h"
 
 void AWizardPlayerController::BeginPlay()
 {
@@ -18,6 +19,7 @@ void AWizardPlayerController::BeginPlay()
 			SetInputMode(FInputModeUIOnly());
 			SetPause(true);
 			bShowMouseCursor = true;
+			
 		}
 	}
 
@@ -32,6 +34,7 @@ void AWizardPlayerController::CreateHealthBar()
 		if (PlayerHealthBar)
 		{
 			PlayerHealthBar->AddToViewport();
+			
 		}
 	}
 
